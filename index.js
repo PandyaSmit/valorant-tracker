@@ -79,8 +79,9 @@ app.post("/last-match/info/:username/:tag", async (req, res) => {
 
 module.exports.handler = serverless(app);
 
-module.exports.local = () =>
-  app.listen(3000, () => console.log(`Listening on: 3000`));
+module.exports.local = () => {
+  console.log("app running");
+};
 
 const token = process.env.DISCORD_TOKEN || "";
 

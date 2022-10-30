@@ -98,7 +98,8 @@ client.on("messageCreate", async (msg) => {
       const response = detailsSummary(details, userDetails[0]);
       msg.reply({ content: response.message, files: [response.files] });
     } catch (error) {
-      msg.reply(error);
+      console.log(JSON.stringify(error, null, 2));
+      msg.reply("Api limit reached. please try again");
     }
   }
 });

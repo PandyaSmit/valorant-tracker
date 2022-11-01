@@ -1,4 +1,5 @@
 const express = require("express");
+const serverless = require("serverless-http");
 const dotenv = require("dotenv");
 const HenrikDevValorantAPI = require("unofficial-valorant-api");
 const _ = require("lodash");
@@ -16,10 +17,6 @@ app.get("/", (req, res) => {
 
 const port = process.env.NODE_PORT || 3000;
 const token = process.env.DISCORD_TOKEN || "";
-
-app.listen(port, async () => {
-  console.log(`Express server listening on SSL port ${port}`);
-});
 
 const getDetails = async (userName, tag) => {
   try {
@@ -102,3 +99,8 @@ client.on("messageCreate", async (msg) => {
 });
 
 client.login(token);
+
+module.exports.handler = serverless(app);
+
+module.exports.local = () =>
+  app.listen(port, () => console.log(`Listening on: ${port}`));
